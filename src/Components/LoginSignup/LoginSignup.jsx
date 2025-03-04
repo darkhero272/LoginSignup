@@ -72,7 +72,7 @@ const LoginSignup = () => {
              data-auto_select="true">
         </div>
         
-        <div className="g_id_signin" data-type="standard"></div>
+        <div className="g_id_signin google-btn" data-type="standard"></div>
 
         <div className="submit-container">
           <div
