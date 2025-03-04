@@ -13,23 +13,32 @@ const LoginSignup = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Load Google Sign-In script dynamically
-    const script = document.createElement("script");
-    script.src = "https://accounts.google.com/gsi/client";
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
+  const script = document.createElement("script");
+  script.src = "https://accounts.google.com/gsi/client";
+  script.async = true;
+  script.defer = true;
+  document.body.appendChild(script);
 
-    window.handleCredentialResponse = (response) => {
-      console.log("Encoded JWT ID token: ", response.credential);
-      navigate("/Dashboard");
-    };
+  script.onload = () => {
+    if (window.google) {
+      window.google.accounts.id.initialize({
+          client_id: "YOUR_CLIENT_ID",
+          callback: handleCredentialResponse,
+        });
+  
+          // Render button inside #google-button-container
+          window.google.accounts.id.renderButton(
+            document.getElementById("google-button-container"),
+            {
+              theme: "outline",
+              size: "large",
+              width: "200",
+            }
+          );
+        }
+      };
+    }, []);
 
-    window.google?.accounts.id.initialize({
-      client_id: "YOUR_CLIENT_ID",
-      callback: window.handleCredentialResponse,
-    });
-  }, [navigate]);
 
   const handleGoogleSignIn = () => {
     window.google?.accounts.id.prompt();
@@ -64,13 +73,11 @@ const LoginSignup = () => {
           </div>
         )}
 
-        {/* Styled Google Sign-In Button */}
+        {/* Google Sign-In Button Container */}
         <div className="submit-container">
-          <div className="submit google-btn" onClick={handleGoogleSignIn}>
-            <img src={google_icon} alt="Google" className="google-icon" />
-            Sign up with Google
-          </div>
+          <div id="google-button-container"></div>
         </div>
+
 
         <div className="submit-container">
           <div
