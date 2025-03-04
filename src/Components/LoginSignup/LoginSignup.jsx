@@ -65,7 +65,7 @@ const LoginSignup = () => {
         )}
 
         {/* Google Sign-In Button */}
-        <div id="g_id_onload google-btn"
+        <div id="g_id_onload"
              data-client_id="YOUR_CLIENT_ID"
              data-context="signin"
              data-callback="handleCredentialResponse"
