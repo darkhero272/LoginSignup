@@ -13,6 +13,7 @@ const Dashboard = () => {
       </div>
       <div className="submit-container">
         <div
+          className="submit"
           onClick={() => {
             navigate("../");
           }}
