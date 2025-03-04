@@ -22,19 +22,10 @@ const LoginSignup = () => {
     // Define the callback function for Google Sign-In
     window.handleCredentialResponse = (response) => {
       console.log("Encoded JWT ID token: ", response.credential);
+      // Send token to backend for verification (optional)
       navigate("/Dashboard"); // Redirect after successful sign-in
     };
-
-    // Initialize Google Sign-In button
-    window.google?.accounts.id.initialize({
-      client_id: "YOUR_CLIENT_ID",
-      callback: window.handleCredentialResponse,
-    });
   }, [navigate]);
-
-  const handleGoogleSignIn = () => {
-    window.google?.accounts.id.prompt(); // Manually trigger Google Sign-In
-  };
 
   const handleClick = (clickedAction) => {
     if (action === clickedAction) {
@@ -73,12 +64,15 @@ const LoginSignup = () => {
           </div>
         )}
 
-        {/* Custom Google Sign-In Button */}
-        <div className="submit-container">
-          <div className="submit" onClick={handleGoogleSignIn}>
-            Sign in with Google
-          </div>
+        {/* Google Sign-In Button */}
+        <div id="g_id_onload"
+             data-client_id="YOUR_CLIENT_ID"
+             data-context="signin"
+             data-callback="handleCredentialResponse"
+             data-auto_select="true">
         </div>
+        
+        <div className="g_id_signin" data-type="standard"></div>
 
         <div className="submit-container">
           <div
