@@ -50,6 +50,15 @@ const LoginSignup = () => {
             Forgot Password? <span>Click Here</span>
           </div>
         )}
+        
+        <div id="g_id_onload"
+             data-client_id="YOUR_CLIENT_ID"
+             data-context="signin"
+             data-callback="handleCredentialResponse"
+             data-auto_select="true">
+        </div>
+        
+        <div class="g_id_signin" data-type="standard"></div>
 
         <div className="submit-container">
           <div
