@@ -6,42 +6,42 @@ import "./LoginSignup.css";
 import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
-import google_icon from "../Assets/google.png"; // Add a Google logo
 
 const LoginSignup = () => {
   const [action, setAction] = useState("Sign Up");
   const navigate = useNavigate();
 
   useEffect(() => {
-  const script = document.createElement("script");
-  script.src = "https://accounts.google.com/gsi/client";
-  script.async = true;
-  script.defer = true;
-  document.body.appendChild(script);
+    // Load Google Sign-In script dynamically
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
 
-  script.onload = () => {
-    if (window.google) {
-      window.google.accounts.id.initialize({
-          client_id: "YOUR_CLIENT_ID",
-          callback: handleCredentialResponse,
-        });
-  
-          // Render button inside #google-button-container
-          window.google.accounts.id.renderButton(
-            document.getElementById("google-button-container"),
-            {
-              theme: "outline",
-              size: "large",
-              width: "200",
-            }
-          );
-        }
-      };
-    }, []);
+    // Define the callback function for Google Sign-In
+    window.handleCredentialResponse = (response) => {
+      console.log("Encoded JWT ID token: ", response.credential);
+      navigate("/Dashboard"); // Redirect after successful sign-in
+    };
 
+    // Initialize Google Sign-In button
+    window.google?.accounts.id.initialize({
+      client_id: "YOUR_CLIENT_ID",
+      callback: window.handleCredentialResponse,
+    });
+  }, [navigate]);
 
   const handleGoogleSignIn = () => {
-    window.google?.accounts.id.prompt();
+    window.google?.accounts.id.prompt(); // Manually trigger Google Sign-In
+  };
+
+  const handleClick = (clickedAction) => {
+    if (action === clickedAction) {
+      navigate("/Dashboard");
+    } else {
+      setAction(clickedAction);
+    }
   };
 
   return (
@@ -73,22 +73,23 @@ const LoginSignup = () => {
           </div>
         )}
 
-        {/* Google Sign-In Button Container */}
+        {/* Custom Google Sign-In Button */}
         <div className="submit-container">
-          <div id="google-button-container"></div>
+          <div className="submit" onClick={handleGoogleSignIn}>
+            Sign in with Google
+          </div>
         </div>
-
 
         <div className="submit-container">
           <div
             className={action === "Login" ? "submit gray" : "submit"}
-            onClick={() => handleGoogleSignIn("Sign Up")}
+            onClick={() => handleClick("Sign Up")}
           >
             Sign Up
           </div>
           <div
             className={action === "Sign Up" ? "submit gray" : "submit"}
-            onClick={() => handleGoogleSignIn("Login")}
+            onClick={() => handleClick("Login")}
           >
             Login
           </div>
