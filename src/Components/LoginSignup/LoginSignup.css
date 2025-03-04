@@ -99,31 +99,3 @@
   color: #676767;
 }
 
-.google-btn {
-  width: 100%;
-  max-width: 200px; /* Adjust width to match other buttons */
-  height: 40px; /* Match height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: none;
-  border-radius: 20px; /* Match your buttons */
-  background-color: #5a1dbf; /* Same as Sign Up button */
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.google-btn:hover {
-  background-color: #4a169f; /* Slightly darker on hover */
-}
-
-.google-icon {
-  width: 18px; /* Resize Google icon */
-  height: 18px;
-  background: white;
-  border-radius: 50%;
-}
-
-
