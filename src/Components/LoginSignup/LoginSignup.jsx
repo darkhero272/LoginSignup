@@ -65,14 +65,14 @@ const LoginSignup = () => {
         )}
 
         {/* Google Sign-In Button */}
-        <div id="g_id_onload"
+        <div id="g_id_onload google-btn"
              data-client_id="YOUR_CLIENT_ID"
              data-context="signin"
              data-callback="handleCredentialResponse"
              data-auto_select="true">
         </div>
         
-        <div className="g_id_signin google-btn" data-type="standard"></div>
+        <div className="g_id_signin " data-type="standard"></div>
 
         <div className="submit-container">
           <div
